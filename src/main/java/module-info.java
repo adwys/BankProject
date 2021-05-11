@@ -3,6 +3,6 @@ module org.example {
     requires javafx.fxml;
     requires java.sql;
 
-    opens org.example to javafx.fxml;
-    exports org.example;
+    opens org.bank to javafx.fxml;
+    exports org.bank;
 }

@@ -1,4 +1,4 @@
-package org.example;
+package org.bank.databaseControllers;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -27,7 +27,6 @@ public class QueryExecutor {
             statement.executeQuery(query);
         }catch (Exception e){
             System.out.println(e);
-            System.exit(0);
         }
     }
 }

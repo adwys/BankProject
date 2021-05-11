@@ -1,4 +1,4 @@
-package org.example;
+package org.bank;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,8 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
+import org.bank.databaseControllers.QueryExecutor;
 
 public class ClientDisplayController extends App implements Initializable {
 
