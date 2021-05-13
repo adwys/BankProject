@@ -18,6 +18,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.bank.Exceptions.ExceptionController;
 import org.bank.databaseControllers.QueryExecutor;
 
 public class ClientDisplayController extends App implements Initializable {
@@ -56,7 +57,7 @@ public class ClientDisplayController extends App implements Initializable {
         }catch (Exception e){
             System.out.println(e);
         }
-
+//        gridPane.setGridLinesVisible(true);
     }
 
     private void insertData(ResultSet res,int index) throws SQLException {
@@ -96,14 +97,20 @@ public class ClientDisplayController extends App implements Initializable {
         delBnt.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                System.out.println(id.getText());
-                QueryExecutor.executeQuery("DELETE FROM public.client\n" +
-                        "WHERE id =" + id.getText());
                 try {
-                    App.setRoot("secondary");
-                } catch (IOException e) {
-                    e.printStackTrace();
+                    if(!ExceptionController.checkDelete(id.getText()))throw new Exception("delete canceled");
+
+                    QueryExecutor.executeQuery("DELETE FROM public.client\n" +
+                            "WHERE id =" + id.getText());
+                    try {
+                        App.setRoot("secondary");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }catch (Exception e){
+                    System.out.println(e);
                 }
+
             }
         });
         gridPane.add(delBnt,7,index);

@@ -13,14 +13,17 @@ public class StartingSceneController extends App  {
 
     @FXML
     private void DisplayClientsHandler(ActionEvent event) throws IOException {
-        System.out.println("diss");
         App.setRoot("secondary");
     }
 
     @FXML
     private void DisplayAddClient(ActionEvent event) throws IOException{
-        System.out.println("add");
         App.setRoot("addClient");
+    }
+
+    @FXML
+    private void xd(ActionEvent event) throws IOException{
+        App.setRoot("selectdisplay");
     }
 
 
