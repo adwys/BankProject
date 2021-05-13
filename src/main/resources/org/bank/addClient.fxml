@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
-<VBox fx:controller="org.bank.AddClientController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="195.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.bank.AddClientController">
    <children>
       <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dodawanie nowego klienta" textAlignment="CENTER" wrappingWidth="602.1366577148438" />
       <GridPane alignment="BOTTOM_RIGHT">
@@ -25,18 +24,19 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <TextField fx:id="name" prefHeight="26.0" prefWidth="358.0" GridPane.columnIndex="1" />
-            <Text  strokeType="OUTSIDE" strokeWidth="0.0" text="Imię" textAlignment="CENTER" wrappingWidth="87.73675727844238" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Imię" textAlignment="CENTER" wrappingWidth="87.73675727844238" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwisko" textAlignment="CENTER" wrappingWidth="86.93667793273926" GridPane.rowIndex="1" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="adres" textAlignment="CENTER" wrappingWidth="86.93670845031738" GridPane.rowIndex="2" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="pesel" textAlignment="CENTER" wrappingWidth="89.2034912109375" GridPane.rowIndex="3" />
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="środki" textAlignment="CENTER" wrappingWidth="87.43240356445312" GridPane.rowIndex="4" />
-            <TextField fx:id="surname"  GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="name" prefHeight="26.0" prefWidth="358.0" GridPane.columnIndex="1" />
+            <TextField fx:id="surname" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="address" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <TextField fx:id="pesel" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField fx:id="means" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Button onAction="#subbmitBtn" alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="612.0" text="Dodaj" />
+      <Button alignment="CENTER" mnemonicParsing="false" onAction="#subbmitBtn" prefHeight="26.0" prefWidth="606.0" text="Dodaj" />
+      <Button onAction="#goBackBtn" mnemonicParsing="false" prefHeight="26.0" prefWidth="622.0" text="Cofnij" />
    </children>
 </VBox>

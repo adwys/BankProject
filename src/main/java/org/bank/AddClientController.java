@@ -7,6 +7,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.bank.databaseControllers.QueryExecutor;
 
+import java.io.IOException;
+
 public class AddClientController {
 
     @FXML
@@ -33,6 +35,11 @@ public class AddClientController {
                 pesel.getText() + ")";
         QueryExecutor.executeQuery(query);
         System.out.println(query);
+    }
+
+    @FXML
+    private void goBackBtn(ActionEvent event) throws IOException {
+        App.setRoot("primary");
     }
 
 }

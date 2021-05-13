@@ -6,19 +6,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.bank.databaseControllers.QueryExecutor;
 
 public class ClientDisplayController extends App implements Initializable {
 
     private final static URL path = ClientDisplayController.class.getResource("secondary.fxml");
-
+    public static int curr_id;
     @FXML
     private GridPane gridPane;
 
@@ -45,6 +50,9 @@ public class ClientDisplayController extends App implements Initializable {
                 insertData(res,index);
                 index++;
             }
+
+
+
         }catch (Exception e){
             System.out.println(e);
         }
@@ -52,13 +60,53 @@ public class ClientDisplayController extends App implements Initializable {
     }
 
     private void insertData(ResultSet res,int index) throws SQLException {
-        for(int i=0;i<6;i++) {
+        Text id = new Text();
+        String data = res.getString(1);
+        id.setText(data);
+        gridPane.add(id,0,index);
+        for(int i=1;i<6;i++) {
             Text text = new Text();
-            String data = res.getString(i+1);
+            data = res.getString(i+1);
             text.setText(data);
 
             gridPane.add(text,i,index);
         }
+
+        Button transactionBtn = new Button();
+        transactionBtn.setText("tranzakcje");
+
+
+        transactionBtn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    curr_id = Integer.parseInt(id.getText());
+                    System.out.println(curr_id);
+                    setRoot("transaction");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        gridPane.add(transactionBtn,6,index);
+
+
+        Button delBnt = new Button();
+        delBnt.setText("usuń");
+        delBnt.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println(id.getText());
+                QueryExecutor.executeQuery("DELETE FROM public.client\n" +
+                        "WHERE id =" + id.getText());
+                try {
+                    App.setRoot("secondary");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        gridPane.add(delBnt,7,index);
     }
 
 //    public static void displayText(Stage stage) throws IOException, SQLException {
