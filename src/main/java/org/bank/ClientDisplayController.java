@@ -19,6 +19,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.bank.Exceptions.ExceptionController;
+import org.bank.databaseControllers.GetSelect;
 import org.bank.databaseControllers.QueryExecutor;
 
 public class ClientDisplayController extends App implements Initializable {
@@ -40,100 +41,8 @@ public class ClientDisplayController extends App implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            ResultSet res = QueryExecutor.executeSelect("SELECT * FROM public.client");
-            int index=1;
-
-            while (res.next()) {
-                if(index>=gridPane.getRowCount()){
-                    gridPane.addRow(index);
-                }
-                insertData(res,index);
-                index++;
-            }
-
-
-
-        }catch (Exception e){
-            System.out.println(e);
-        }
-//        gridPane.setGridLinesVisible(true);
+        GetSelect getSelect = new GetSelect(gridPane);
+        getSelect.select(QueryExecutor.executeSelect("SELECT * FROM public.client"));
     }
 
-    private void insertData(ResultSet res,int index) throws SQLException {
-        Text id = new Text();
-        String data = res.getString(1);
-        id.setText(data);
-        gridPane.add(id,0,index);
-        for(int i=1;i<6;i++) {
-            Text text = new Text();
-            data = res.getString(i+1);
-            text.setText(data);
-
-            gridPane.add(text,i,index);
-        }
-
-        Button transactionBtn = new Button();
-        transactionBtn.setText("tranzakcje");
-
-
-        transactionBtn.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    curr_id = Integer.parseInt(id.getText());
-                    System.out.println(curr_id);
-                    setRoot("transaction");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        gridPane.add(transactionBtn,6,index);
-
-
-        Button delBnt = new Button();
-        delBnt.setText("usuń");
-        delBnt.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    if(!ExceptionController.checkDelete(id.getText()))throw new Exception("delete canceled");
-
-                    QueryExecutor.executeQuery("DELETE FROM public.client\n" +
-                            "WHERE id =" + id.getText());
-                    try {
-                        App.setRoot("secondary");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }catch (Exception e){
-                    System.out.println(e);
-                }
-
-            }
-        });
-        gridPane.add(delBnt,7,index);
-    }
-
-//    public static void displayText(Stage stage) throws IOException, SQLException {
-//
-//        VBox pane = new VBox();
-//        ResultSet res = QueryExecutor.executeSelect("SELECT * FROM public.client");
-//        Text header = new Text();
-//        String headerText = "#  imie   nazwisko   adres   srodki   pesel";
-//        header.setText(headerText);
-//
-//        pane.getChildren().add(header);
-//        while (res.next()) {
-//            Text text = new Text();
-//            String data = res.getString(1)+ " " + res.getString(2) + " " + " " + res.getString(3)+ " " + res.getString(4)+ " " + res.getString(5)+ " " + res.getString(6);
-////            data =String.format("%43s", data);
-//            text.setText(data);
-//            pane.getChildren().add(text);
-//        }
-//        res.close();
-//        stage.setScene(new Scene(pane,640,480));
-//        stage.show();
-//    }
 }

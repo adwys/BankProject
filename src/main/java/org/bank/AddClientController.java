@@ -36,7 +36,7 @@ public class AddClientController {
 
         try {
             if(!check_client()) throw new InvalidUserException("user error");
-            String query = "INSERT INTO public.client(\"name\",\"surname\",\"ADDRESS        \",\"means\",\"pesel\")" +
+            String query = "INSERT INTO public.client(\"name\",\"surname\",\"address\",\"means\",\"pesel\")" +
                     "VALUES ('" + name.getText() +"', '"+surname.getText()+"', '" +address.getText() +"', "+means.getText() + ", " +
                     pesel.getText() + ")";
             QueryExecutor.executeQuery(query);

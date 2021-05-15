@@ -40,16 +40,23 @@ public class ExceptionController {
     }
 
     public static void Invalid_user(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("New Client ERROR");
         alert.setHeaderText("Nie poprawny format Klienta");
         alert.showAndWait();
     }
 
     public static void Invalid_payment(){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Payment ERROR");
         alert.setHeaderText("Brak wystarczających środków");
+        alert.showAndWait();
+    }
+
+    public static void No_Data(){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Brak Danych");
+        alert.setHeaderText("W bazie danych nie ma Klienta/Klientów u których zagadzały by się te dane");
         alert.showAndWait();
     }
 
