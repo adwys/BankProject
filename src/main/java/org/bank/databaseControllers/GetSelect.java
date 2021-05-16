@@ -2,6 +2,7 @@ package org.bank.databaseControllers;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.GridPane;
@@ -41,12 +42,13 @@ public class GetSelect {
 
     public void select(ResultSet res){
         try {
-
             int index=1;
-
+            int height = 400;
             while (res.next()) {
                 if(index>=gridPane.getRowCount()){
-                    gridPane.addRow(index);
+                    gridPane.addRow(index+1);
+                    App.stage.setHeight(height);
+                    if(height<800)height+=25;
                 }
                 insertData(res,index);
                 index++;

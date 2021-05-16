@@ -15,11 +15,12 @@ import java.sql.SQLException;
 public class App extends Application {
 
     private static Scene scene;
-    public Parent root;
+    public static Stage stage;
 
 
     @Override
     public void start(Stage stage) throws IOException, SQLException {
+        App.stage = stage;
         scene = new Scene(loadFXML("primary"));
         stage.setScene(scene);
         stage.show();

@@ -22,7 +22,7 @@ public class StartingSceneController extends App  {
     }
 
     @FXML
-    private void xd(ActionEvent event) throws IOException{
+    private void toSelect(ActionEvent event) throws IOException{
         App.setRoot("selectdisplay");
     }
 
