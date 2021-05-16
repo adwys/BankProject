@@ -90,12 +90,12 @@ public class TransferController implements Initializable {
     private void transfer() throws SQLException {
         try {
             String s = sender.getValue();
-            sender_id= Integer.parseInt(String.valueOf(s.charAt(0)));
+            sender_id= Integer.parseInt(s.split("[^\\d]")[0]);
             String r = receiver.getValue();
-            receiver_id= Integer.parseInt(String.valueOf(r.charAt(0)));
+            receiver_id= Integer.parseInt(r.split("[^\\d]")[0]);
             System.out.println(sender_id + " " + receiver_id);
         }catch (Exception e){
-            System.out.println("transfer exception");
+            System.out.println("transfer exception "+e);
         }
         if(sender_id == receiver_id){
             ExceptionController.Same_id();
@@ -116,7 +116,7 @@ public class TransferController implements Initializable {
             ExceptionController.Invalid_payment();
             return;
         }
-
+        if(!ExceptionController.check())return;
         String upd_sender = String.format(UPDATE,sender_money-sum,sender_id);
         System.out.println(upd_sender);
         QueryExecutor.executeQuery(upd_sender);
