@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import org.bank.Exceptions.ExceptionController;
 import org.bank.Exceptions.InvalidTransferAmount;
+import org.bank.databaseControllers.GetSelect;
 import org.bank.databaseControllers.QueryExecutor;
 
 import java.io.IOException;
@@ -64,12 +65,21 @@ public class TransactionController implements Initializable {
             ExceptionController.empty_textField();
             return;
         }
+        if(!ExceptionController.check())return;
        double value = Float.parseFloat(ilosc.getText());
-       int id = ClientDisplayController.curr_id;
+       int id = GetSelect.curr_id;
+        System.out.println("curr id = "+id);
        String query = "SELECT * from public.client WHERE \"id\" ="+id;
-       ResultSet res = QueryExecutor.executeSelect(query);
-       res.next();
-        double means = Float.parseFloat(res.getString(5));
+       ResultSet res = null;
+        double means = 0;
+        try {
+           res = QueryExecutor.executeSelect(query);
+           res.next();
+           means = Float.parseFloat(res.getString(5));
+       }catch (Exception e){
+           System.out.println("SQL error " + e);
+       }
+       
        System.out.println(means);
        String forma = String.format(Locale.US,"%.2f",value+means);
        String upd = String.format(UPDATE,forma,id);
@@ -88,7 +98,8 @@ public class TransactionController implements Initializable {
             if (!ExceptionController.check()) return;
 
             double value = Float.parseFloat(ilosc.getText());
-            int id = ClientDisplayController.curr_id;
+            int id = GetSelect.curr_id;;
+            System.out.println("curr id = "+id);
             String query = "SELECT * from public.client WHERE \"id\" =" + id;
             ResultSet res = QueryExecutor.executeSelect(query);
             res.next();

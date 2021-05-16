@@ -18,7 +18,7 @@ public class GetSelect {
     private String AllClients = "SELECT * from public.client";
     private GridPane gridPane;
     private ChoiceBox<String> choiceBox;
-    private int curr_id;
+    public static int curr_id;
     public GetSelect(GridPane gridPane) {
         this.gridPane = gridPane;
     }
