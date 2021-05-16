@@ -3,6 +3,7 @@ package org.bank.databaseControllers;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import org.bank.App;
@@ -13,14 +14,30 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class GetSelect {
-
+    private String AllClients = "SELECT * from public.client";
     private GridPane gridPane;
+    private ChoiceBox<String> choiceBox;
     private int curr_id;
     public GetSelect(GridPane gridPane) {
         this.gridPane = gridPane;
     }
 
+    public void ChoiceBoxSelect(){
 
+        try {
+            ResultSet res = QueryExecutor.executeSelect(AllClients);
+            while (res.next()) {
+                String new_client = res.getString(1) + " " + res.getString(2) + " " + res.getString(3);
+                choiceBox.getItems().add(new_client);
+            }
+        }catch (Exception e){
+            System.out.println("ChoiceBoxSelect Exception");
+        }
+    }
+
+    public GetSelect(ChoiceBox<String> choiceBox) {
+        this.choiceBox = choiceBox;
+    }
 
     public void select(ResultSet res){
         try {

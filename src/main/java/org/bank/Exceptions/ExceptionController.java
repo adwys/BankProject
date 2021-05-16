@@ -60,6 +60,18 @@ public class ExceptionController {
         alert.showAndWait();
     }
 
+    public static void Same_id(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Wysyłający i odbierający nie może być tą samą osobą");
+        alert.showAndWait();
+    }
+
+    public static void empty_textField(){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setHeaderText("Wprowadź dane!");
+        alert.showAndWait();
+    }
+
 
 }
 

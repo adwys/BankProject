@@ -26,6 +26,10 @@ public class StartingSceneController extends App  {
         App.setRoot("selectdisplay");
     }
 
+    @FXML
+    private void toTransfer(ActionEvent event) throws IOException{
+        App.setRoot("transfer");
+    }
 
 
 }

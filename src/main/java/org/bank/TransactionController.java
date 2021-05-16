@@ -60,6 +60,10 @@ public class TransactionController implements Initializable {
 
     @FXML
     private void Wpłać(ActionEvent event) throws IOException, SQLException {
+        if(ilosc.getText().equals("")){
+            ExceptionController.empty_textField();
+            return;
+        }
        double value = Float.parseFloat(ilosc.getText());
        int id = ClientDisplayController.curr_id;
        String query = "SELECT * from public.client WHERE \"id\" ="+id;
@@ -76,6 +80,10 @@ public class TransactionController implements Initializable {
 
     @FXML
     private void Wypłać(ActionEvent event) throws IOException, SQLException {
+        if(ilosc.getText().equals("")){
+            ExceptionController.empty_textField();
+            return;
+        }
         try {
             if (!ExceptionController.check()) return;
 

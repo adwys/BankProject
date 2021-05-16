@@ -23,7 +23,7 @@
          <children>
             <Button onAction="#xd" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="aa" GridPane.rowIndex="1" />
             <Button fx:id="displayClients" mnemonicParsing="false" text="Wyświetl klientów" onAction="#DisplayClientsHandler" GridPane.rowIndex="2" />
-            <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button onAction="#toTransfer" mnemonicParsing="false" text="transfer" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Button onAction="#DisplayAddClient" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="Dodaj klienta" />
             <Button mnemonicParsing="false" text="Button" GridPane.columnIndex="1" />

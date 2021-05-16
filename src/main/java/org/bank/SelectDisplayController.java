@@ -1,5 +1,7 @@
 package org.bank;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
@@ -34,19 +36,24 @@ public class SelectDisplayController implements Initializable {
         choiceBox.getItems().add("Nazwisko");
         choiceBox.getItems().add("adres");
         choiceBox.getItems().add("pesel");
+
+
         textField.setText("0");
         gridPane.setVisible(false);
+
+
     }
 
 
     @FXML
-    private void find(){ //query mozna poprawic by nie było ifow
+    private void find(){
 
         try {
             String val = choiceBox.getValue();
             val = to_eng(val);
             if(textField.getText().equals(""))throw new SQLException("no entry data");
             String query = "SELECT * FROM public.client WHERE "+ val+ "= '" + textField.getText()+"'";
+            if(!query_check())throw new Exception();
             System.out.println(query);
 
 
@@ -68,6 +75,18 @@ public class SelectDisplayController implements Initializable {
         if(val.equals("Nazwisko"))return "surname";
         if(val.equals("adres"))return "address";
         return val;
+    }
+
+    private boolean query_check(){
+        if(choiceBox.getValue().equals("id") || choiceBox.getValue().equals("pesel")){
+            try {
+                Integer.parseInt(textField.getText());
+                return true;
+            }catch (Exception e){
+                return false;
+            }
+        }
+        return true;
     }
 
     @FXML
